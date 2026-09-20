@@ -134,181 +134,127 @@ Reparifors, pretože Finite rast zastaví, no nezvráti.
 <p style="text-align: right; clear:
 both;"><img src="https://i.ibb.co/tPtxVkk/pppp.png"
 width="6%"></p> 
-<!-- ŠTÝLY PRE ANIMÁCIE, KARTY, UPRAVENÝ ODDEĽOVAČ A
-ODRAŽKY -->
+ 
+<!-- ŠTÝLY PRE ANIMÁCIE, KARTY, UPRAVENÝ ODDEĽOVAČ A ODRÁŽKY -->
 <style>
-    /* Globálne nastavenie pozadia, veľkosti a farby textu pre celú stránku */
+    /* Globálne nastavenie pre celú stránku */
     body {
         background-color: #23120c !important;
         font-size: 13px !important;
         color: #d8b37e !important;
     }
 
-    /* Poistka pre elementy, ktoré by dedili čiernu farbu */
+    /* Vynútenie farby textu pre štandardné elementy, aby sa prispôsobili čitateľnosti */
     p, li, span, div {
         color: #d8b37e;
     }
 
-    /* Špecifické farebné akcenty zanecháme fialové podľa pôvodného dizajnu */
-    .magic-bullets li::before {
-        color: #9360e6;
-    }
-
-    .skull-divider {
-        color: #9360e6;
-    }
-
     .magic-bullets {
-        list-style:
-none;
-        padding-left:
-25px;
-        margin: 10px 0
-15px 0;
+        list-style: none;
+        padding-left: 25px;
+        margin: 10px 0 15px 0;
     }
-    .magic-bullets li
-{
-        position:
-relative;
-        margin-bottom:
-6px;
+    .magic-bullets li {
+        position: relative;
+        margin-bottom: 6px;
     }
-    .magic-bullets
-li::before {
-        content:
-"✦";
-        position:
-absolute;
+    .magic-bullets li::before {
+        content: "✦";
+        position: absolute;
         left: -20px;
-        font-size:
-14px;
+        color: #9360e6;
+        font-size: 14px;
     }
- 
-    /* PÔVODNÝ ŠTÝL
-PRE OTÁČANIE KARIET (360°) */
+
+    /* PÔVODNÝ ŠTÝL PRE OTÁČANIE KARIET (360°) */
    .spell-card-container {
-        perspective:
-1000px;
-        display:
-inline-block;
+        perspective: 1000px;
+        display: inline-block;
         float: left;
-        margin-right:
-20px;
-        margin-bottom:
-15px;
+        margin-right: 20px;
+        margin-bottom: 15px;
     }
     .spell-card {
-        transition:
-transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         transform-style: preserve-3d;
-        border-radius:
-10px;
-        box-shadow: 0
-4px 10px rgba(0,0,0,0.2);
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
    .spell-card-container:hover .spell-card {
-        transform:
-rotateY(360deg);
-        box-shadow: 0
-8px 20px rgba(147, 96, 230, 0.3);
+        transform: rotateY(360deg);
+        box-shadow: 0 8px 20px rgba(147, 96, 230, 0.3);
     }
- 
+
    .modern-magic-title {
-        position:
-relative;
-        display:
-inline-block;
+        position: relative;
+        display: inline-block;
         padding-bottom: 2px;
     }
    .modern-magic-title::after {
         content: '';
         position: absolute;
         width: 100%;
-        transform:
-scaleX(0);
+        transform: scaleX(0);
         height: 2px;
         bottom: 0;
         left: 0;
         background-color: #9360e6;
         transform-origin: bottom center;
-        transition:
-transform 0.3s ease-out;
+        transition: transform 0.3s ease-out;
     }
    .modern-magic-title:hover::after {
-        transform:
-scaleX(1);
+        transform: scaleX(1);
     }
- 
-    /* UPRAVENÝ
-JEMNEJŠÍ ODDEĽOVAČ S LEBKOU */
+
+    /* UPRAVENÝ JEMNEJŠÍ ODDEĽOVAČ S LEBKOU */
     .skull-divider {
-        text-align:
-center;
-        margin: 35px
-0;
-        font-size:
-20px;
-        position:
-relative;
-        line-height:
-1;
+        text-align: center;
+        margin: 35px 0;
+        color: #9360e6;
+        font-size: 20px;
+        position: relative;
+        line-height: 1;
         opacity: 0.85;
-        text-shadow: 0
-0 5px rgba(147, 96, 230, 0.3);
-        animation:
-skullPulse 4s infinite alternate ease-in-out;
+        text-shadow: 0 0 5px rgba(147, 96, 230, 0.3);
+        animation: skullPulse 4s infinite alternate ease-in-out;
     }
    .skull-divider::before, .skull-divider::after {
         content: '';
-        position:
-absolute;
+        position: absolute;
         top: 50%;
         width: 40%;
         height: 1px;
-        background:
-linear-gradient(to right, rgba(0, 0, 0, 0), rgba(147, 96, 230, 0.6) 80%,
-rgba(74, 51, 110, 0.8) 100%);
+        background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(147, 96, 230, 0.6) 80%, rgba(74, 51, 110, 0.8) 100%);
     }
    .skull-divider::before { left: 4%; }
    .skull-divider::after { right: 4%; transform: rotate(180deg); }
- 
-    @keyframes
-skullPulse {
-        0% {
-transform: scale(1); opacity: 0.75; }
-        100% {
-transform: scale(1.04); opacity: 0.95; }
+
+    @keyframes skullPulse {
+        0% { transform: scale(1); opacity: 0.75; }
+        100% { transform: scale(1.04); opacity: 0.95; }
     }
 </style>
  
-<!-- TVOJ PÔVODNÝ JS SKRIPT PRE ROTÁCIU KARIET -->
+<!-- SKRIPT PRE ROTÁCIU KARIET -->
 <script>
-document.addEventListener("DOMContentLoaded",
-function() {
-    const spellImages
-= document.querySelectorAll('img[src*="protego"],
-img[src*="finite"]');
+document.addEventListener("DOMContentLoaded", function() {
+    const spellImages = document.querySelectorAll('img[src*="protego"], img[src*="finite"]');
     
     spellImages.forEach(img => {
-        const
-container = document.createElement('div');
+        const container = document.createElement('div');
         container.className = 'spell-card-container';
         
-        if (img.align
-=== "left") {
+        if (img.align === "left") {
             container.style.float = "left";
             container.style.marginRight = "20px";
         }
- 
-        const card =
-document.createElement('div');
-        card.className
-= 'spell-card';
+
+        const card = document.createElement('div');
+        card.className = 'spell-card';
         card.style.width = img.getAttribute('width') + 'px';
         card.style.height = img.getAttribute('height') + 'px';
         
-        const newImg =
-img.cloneNode(true);
+        const newImg = img.cloneNode(true);
         newImg.removeAttribute('align');
         newImg.style.display = 'block';
         newImg.style.width = '100%';
