@@ -1,6 +1,14 @@
 <center><img
 src="https://i.ibb.co/X3JzJGy/Obrana.png"
-width="85%"></center> 
+width="85%" 
+id="magic-title-audio" 
+style="cursor: pointer;"
+></center> 
+
+<!-- HUDBA Z TÉHO GITHUBU -->
+<audio id="background-music" preload="auto">
+    <source src="https://raw.githubusercontent.com/MarionArrington/OPCM/main/348858__r_mac__horror-film-score-i.mp3" type="audio/mpeg">
+</audio>
   
 <p style="text-align: justify">Dnes sa
 zameriame na ďalší z rady kúzliacich predmetov, tentokrát Obranu proti čiernej
@@ -189,7 +197,7 @@ width="6%"></p>
         position: relative;
         display: inline-block;
         padding-bottom: 2px;
-        color: #9360e6 !important; /* Vynútenie fialovej farby pre PROTEGO a FINITE */
+        color: #9360e6 !important;
     }
    .modern-magic-title::after {
         content: '';
@@ -236,9 +244,10 @@ width="6%"></p>
     }
 </style>
  
-<!-- SKRIPT PRE ROTÁCIU KARIET -->
+<!-- SKRIPT PRE ROTÁCIU KARIET A PREHRATIE HUDBY -->
 <script>
 document.addEventListener("DOMContentLoaded", function() {
+    // 1. Rotácia kariet
     const spellImages = document.querySelectorAll('img[src*="protego"], img[src*="finite"]');
     
     spellImages.forEach(img => {
@@ -255,7 +264,7 @@ document.addEventListener("DOMContentLoaded", function() {
         card.style.width = img.getAttribute('width') + 'px';
         card.style.height = img.getAttribute('height') + 'px';
         
-        const newImg = img.cloneNode(true);
+        const newImg = img.cloneNode.call(img, true);
         newImg.removeAttribute('align');
         newImg.style.display = 'block';
         newImg.style.width = '100%';
@@ -265,5 +274,21 @@ document.addEventListener("DOMContentLoaded", function() {
         container.appendChild(card);
         img.parentNode.replaceChild(container, img);
     });
+
+    // 2. Kliknutie na nadpis pre spustenie hudby
+    const titleImage = document.getElementById('magic-title-audio');
+    const backgroundMusic = document.getElementById('background-music');
+
+    if (titleImage && backgroundMusic) {
+        titleImage.addEventListener('click', function() {
+            if (backgroundMusic.paused) {
+                backgroundMusic.play().catch(error => {
+                    console.log("Prehratie hudby zlyhalo:", error);
+                });
+            } else {
+                backgroundMusic.pause();
+            }
+        });
+    }
 });
 </script>
