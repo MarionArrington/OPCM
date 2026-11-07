@@ -50,13 +50,20 @@
 </div>
 
 <style>
-    /* OBMEDZENIE ŠÍRKY STRANY NA POLOVICU A ZAROVNANIE NA STRED S BIELYMI BOKMI */
+    /* OBMEDZENIE ŠÍRKY STRANY NA 50 %, ZAROVNANIE NA STRED A BIELE POZADIE CONTAINERU */
     .magic-page-wrapper {
-        max-width: 50%;
+        width: 50%;
         margin: 0 auto;
         background-color: #ffffff;
         padding: 20px;
         box-sizing: border-box;
+    }
+
+    /* PRISPÔSOBENIE PRE MOBILNÉ ZARIADENIA, ABY TEXT NEBOL PRÍLIŠ ÚZKY */
+    @media (max-width: 768px) {
+        .magic-page-wrapper {
+            width: 90%;
+        }
     }
 
     .magic-bullets {
