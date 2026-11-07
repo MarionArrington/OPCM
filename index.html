@@ -1,9 +1,18 @@
 <!-- BIELE POZADIE PRE CELÚ PLOCHU OKOLO ČLÁNKU -->
 <div style="background-color: #ffffff; width: 100%; padding: 20px 0;">
 
+    <!-- AUDIO ELEMENT S UPRAVENÝM HODVÁBNYMI HUDBENÝM ODKAZOM -->
+    <audio id="magic-theme-audio" src="https://raw.githubusercontent.com/MarionArrington/OPCM/main/348858__r_mac__horror-film-score-i.mp3" preload="auto" loop></audio>
+
     <!-- HLAVNÝ CONTAINER OBMEDZENÝ NA 50% ŠÍRKY A ZAROVNANÝ NA STRED -->
     <div class="magic-page-wrapper">
-        <center><img src="https://i.ibb.co/X3JzJGy/Obrana.png" width="85%"></center> 
+        <!-- KLIKATEĽNÝ HLAVNÝ BANNER S IKONOU HUDBY -->
+        <center>
+            <div id="play-magic-theme" class="magic-banner-container" title="Kliknutím spustíš/zastavíš hudbu">
+                <img src="https://i.ibb.co/X3JzJGy/Obrana.png" width="85%" style="display: block; margin: 0 auto;">
+                <div class="magic-audio-hint">🎵 Kliknutím prehráš temnú zvukovú stopu</div>
+            </div>
+        </center> 
           
         <p style="text-align: justify">Dnes sa zameriame na ďalší z rady kúzliacich predmetov, tentokrát Obranu proti čiernej mágii (často označovanú pojmom temné umenie). Náplň tohto predmetu spočíva v systematickom osvojovaní si schopnosti efektívne sa <font color="#9360e6" style="font-weight: 600;">brániť proti čiernej mágii v jej rozličných formách:</font></p>
 
@@ -55,27 +64,49 @@
             Nefunguje však univerzálne, v niektorých prípadoch je nutné využiť špecifické protikúzla. Napríklad kúzla s trvalým účinkom – Herbifors (z dutín obete začne vyrastať plevel), Densaugeo (enormne zväčší zuby) – pri ktorých využívame protikúzlo Reparifors, pretože Finite rast zastaví, no nezvráti. 
         </p> 
           
-        <!-- NOVÝ PODPIS S WIDTH 13% -->
+        <!-- PODPIS S WIDTH 13% -->
         <p style="text-align: right; clear: both;"><img src="https://i.ibb.co/tPtxVkk/pppp.png" style="width: 13%;"></p>
     </div>
 
 </div>
 
-<!-- ŠTÝLY PRE ŠÍRKU, HNEDÉ POZADIE TEXTU, NOVÚ FARBU PÍSMA #d8b37e, ANIMÁCIE, KARTY A ODDEĽOVAČ -->
+<!-- ŠTÝLY PRE ŠÍRKU, HNEDÉ POZADIE TEXTU, FARBU PÍSMA #d8b37e, ANIMÁCIE, KARTY, ODDEĽOVAČ A INTERAKTÍVNY NADPIS -->
 <style>
-    /* OBMEDZENIE ŠÍRKY NA 50% A ZAROVNANIE NA STRED */
     .magic-page-wrapper {
         width: 50% !important;
         margin: 0 auto !important;
-        background-color: #23120c !important; /* HNEDÉ POZADIE PRE ČASŤ S TEXTOM */
-        color: #d8b37e !important; /* NOVÁ FARBA PÍSMA */
+        background-color: #23120c !important;
+        color: #d8b37e !important;
         padding: 30px;
         box-sizing: border-box;
     }
 
-    /* ZABEZPEČENIE, ABY VŠETKY TEXTY A ZOZNAMY DEDILI NOVÚ FARBU */
     .magic-page-wrapper p, .magic-page-wrapper li {
         color: #d8b37e !important;
+    }
+
+    .magic-banner-container {
+        cursor: pointer;
+        position: relative;
+        display: inline-block;
+        transition: transform 0.2s ease, filter 0.2s ease;
+    }
+    .magic-banner-container:hover {
+        transform: scale(1.02);
+        filter: brightness(1.1);
+    }
+    .magic-audio-hint {
+        font-family: 'Georgia', serif;
+        font-size: 12px;
+        color: #9360e6;
+        margin-top: 6px;
+        letter-spacing: 1px;
+        opacity: 0.85;
+        transition: opacity 0.3s;
+    }
+    .magic-banner-container:hover .magic-audio-hint {
+        opacity: 1;
+        text-shadow: 0 0 8px rgba(147, 96, 230, 0.6);
     }
 
     .magic-bullets {
@@ -95,7 +126,6 @@
         font-size: 14px;
     }
 
-    /* PÔVODNÝ ŠTÝL PRE OTÁČANIE KARIET (360°) */
     .spell-card-container {
         perspective: 1000px;
         display: inline-block;
@@ -135,7 +165,6 @@
         transform: scaleX(1);
     }
 
-    /* JEMNEJŠÍ ODDEĽOVAČ S LEBKOU */
     .skull-divider {
         text-align: center;
         margin: 35px 0;
@@ -164,9 +193,24 @@
     }
 </style>
 
-<!-- TVOJ PÔVODNÝ JS SKRIPT PRE ROTÁCIU KARIET -->
 <script>
 document.addEventListener("DOMContentLoaded", function() {
+    const magicBanner = document.getElementById('play-magic-theme');
+    const magicAudio = document.getElementById('magic-theme-audio');
+
+    if (magicBanner && magicAudio) {
+        magicBanner.addEventListener('click', function() {
+            if (magicAudio.paused) {
+                magicAudio.play().catch(e => console.log("Prehrávanie zlyhalo:", e));
+                magicBanner.style.filter = "brightness(1.2) drop-shadow(0 0 10px rgba(147, 96, 230, 0.8))";
+            } else {
+                magicAudio.pause();
+                magicAudio.currentTime = 0;
+                magicBanner.style.filter = "none";
+            }
+        });
+    }
+
     const spellImages = document.querySelectorAll('img[src*="protego"], img[src*="finite"]');
     
     spellImages.forEach(img => {
